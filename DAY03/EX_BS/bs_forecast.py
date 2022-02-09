@@ -5,5 +5,3 @@ url="https://www.korea.kr/rss/dept_kma.xml"
 res=req.urlopen(url)
 
 soup=BeautifulSoup(res, "html.parser")
-
-locations=soup
