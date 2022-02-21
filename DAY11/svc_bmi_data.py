@@ -19,16 +19,17 @@ def calc_bmi(h, w):
     return "fat"
 
 # 출력 파일 준비하기
-fp=open(dataFile, "w", encoding="utf-8")
-fp.write("height,weight,label\r\n")
+with open(dataFile, "w", encoding="utf-8") as fp:
+    # csv 파일의 첫번째 줄에 컬럼명 추가
+    fp.write("height,weight,bmi\n")
 
-# 무작위로 데이터 생성하기
-cnt={"thin":0, "normal":0, "fat":0}
-for i in range(20000):
-    h=random.randint(120, 200)
-    w=random.randint(35,80)
-    label=calc_bmi(h, w)
-    cnt[label]+=1
-    fp.write("{0},{1},{2}\r\n".format(h, w, label))
-fp.close()
-print("ok, ", cnt)
+    # 무작위로 데이터 생성하기
+    for i in range(20000):
+        h=random.randint(120, 200)  # 120~200 의 random int
+        w=random.randint(35,80)
+        label=calc_bmi(h, w)
+        fp.write("{0},{1},{2}\n".format(h, w, label))
+
+if os.path.exists(dataFile):
+    print("Create Data File OK")
+else : print("Fail! check your code..")
